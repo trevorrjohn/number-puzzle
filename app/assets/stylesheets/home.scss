@@ -1,0 +1,44 @@
+.title {
+  width: 100%;
+  text-align: center;
+  color: #3D6599;
+}
+.board {
+  background-color: #e2e2e2;
+  padding: 10px;
+  border-radius: 4px;
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+
+  .row {
+    min-width: 262px;
+    overflow: scroll;
+  }
+  .tile {
+    display: inline-block;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 2px;
+    padding: 5px;
+    font-size: 20px;
+    text-align: center;
+    line-height: 48px;
+    height: 48px;
+    width: 48px;
+
+    &.tile-blank {
+      background-color: #3D6599;
+    }
+  }
+}
