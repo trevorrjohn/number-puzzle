@@ -53,6 +53,8 @@ GEM
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
     erubis (2.7.0)
+    es6-promise-rails (3.2.1)
+      railties (>= 3.1.0)
     execjs (2.7.0)
     ffi (1.9.14)
     globalid (0.3.7)
@@ -206,6 +208,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
+  es6-promise-rails
   haml-rails
   jasmine-rails
   jbuilder (~> 2.5)
