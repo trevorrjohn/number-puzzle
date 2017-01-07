@@ -6,6 +6,51 @@ describe('Helper', function() {
   afterEach(() => {
     Helper.GRID_SIZE = originalSize;
   });
+  describe('.GRID_SIZE', function() {
+    it('returns 4 by default', function() {
+      expect(Helper.GRID_SIZE).toBe(4);
+    });
+    describe('when set', function() {
+      it('returns what size is set', function() {
+        Helper.GRID_SIZE = 10;
+        expect(Helper.GRID_SIZE).toBe(10);
+      });
+    });
+  });
+  describe('.solvedGrid', function() {
+    describe('when 2x2 grid', function() {
+      it('returns the grid as expected', function() {
+        Helper.GRID_SIZE = 2;
+        expect(Helper.solvedGrid).toEqual([ [1, 2], [3, -1] ]);
+      });
+    });
+    describe('when 3x3 grid', function() {
+      it('returns a solved grid', function() {
+        Helper.GRID_SIZE = 3;
+        expect(Helper.solvedGrid).toEqual([
+          [1, 2, 3], [4, 5, 6], [7, 8, -1]
+        ]);
+      });
+    });
+    describe('when 4x4 grid', function() {
+      it('returns a solved grid', function() {
+        Helper.GRID_SIZE = 4;
+        expect(Helper.solvedGrid).toEqual([
+          [1, 2, 3, 4], [5, 6, 7, 8],
+          [9, 10, 11, 12], [13, 14, 15, -1]
+        ]);
+      });
+    });
+    describe('when 5x5 grid', function() {
+      it('returns a solved grid', function() {
+        Helper.GRID_SIZE = 5;
+        expect(Helper.solvedGrid).toEqual([
+          [1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15],
+          [16, 17, 18, 19, 20], [21, 22, 23, 24, -1]
+        ]);
+      });
+    });
+  });
   describe('#oppositeDirection', function() {
     it('returns the opposite direction', function() {
       const helper = new Helper();
@@ -20,11 +65,6 @@ describe('Helper', function() {
     it('returns the steps to the orignial positino', function() {
       const helper = new Helper();
       Helper.GRID_SIZE = 3;
-      /*
-       * 1 * 2 *  3 *
-       * 4 * 5 *  6 *
-       * 7 * 8 * -1 *
-       */
       expect(helper.distanceToOriginal(1, 0, 0)).toBe(0)
       expect(helper.distanceToOriginal(1, 2, 0)).toBe(2)
       expect(helper.distanceToOriginal(1, 2, 2)).toBe(4)
@@ -35,20 +75,14 @@ describe('Helper', function() {
       expect(helper.distanceToOriginal(8, 0, 0)).toBe(3)
 
       Helper.GRID_SIZE = 4;
-      /*
-       * 1  *  2 *  3 *  4 *
-       * 5  *  6 *  7 *  8 *
-       * 9  * 10 * 11 * 12 *
-       * 13 * 14 * 15 * -1 *
-       */
       expect(helper.distanceToOriginal(1, 0, 0)).toBe(0)
       expect(helper.distanceToOriginal(10, 2, 1)).toBe(0)
       expect(helper.distanceToOriginal(15, 0, 0)).toBe(5)
       expect(helper.distanceToOriginal(8, 3, 0)).toBe(5)
     });
   });
-  describe("#solvedPosition", function() {
-    it("returns the correct position for the number", function() {
+  describe('#solvedPosition', function() {
+    it('returns the correct position for the number', function() {
       const helper = new Helper();
       Helper.GRID_SIZE = 3;
       expect(helper.solvedPosition(1)).toEqual([0, 0]);

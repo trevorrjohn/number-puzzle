@@ -6,18 +6,21 @@ class Helper {
     this.grid_size = grid_size;
   }
   static get solvedGrid() {
-    return [
-      [1,   2,  3,  4],
-      [5,   6,  7,  8],
-      [9,  10, 11, 12],
-      [13, 14, 15, -1]
-    ];
+    const grid = [];
+    for (let i = 0; i < Helper.GRID_SIZE; i++) {
+      grid[i] = [];
+      for (let j = 0; j < Helper.GRID_SIZE; j++) {
+        grid[i][j] = (i * Helper.GRID_SIZE) + j + 1;
+      }
+    }
+    grid[Helper.GRID_SIZE - 1][Helper.GRID_SIZE - 1] = -1
+    return grid;
   }
   static get solvedBlankPos() {
-    return [3, 3];
+    return [Helper.GRID_SIZE - 1, Helper.GRID_SIZE - 1];
   }
   static printGrid(grid) {
-    let output = "";
+    let output = "\n";
     for (let row = 0; row < Helper.GRID_SIZE; row++) {
       for (let col = 0; col < Helper.GRID_SIZE; col++) {
         let num = grid[row][col];
