@@ -131,15 +131,12 @@ describe('Board', function() {
   });
   describe('#boardAfterMove', function() {
     describe('when the move is not valid', function() {
-      it('returns the same board', function() {
+      it('throws an error', function() {
         const grid = [[2, 1, 3], [5, 4, 6], [-1, 7, 8]];
         Helper.GRID_SIZE = 3;
         const helper = new Helper();
         const board = new Board(grid, [2, 0], helper);
-        const newBoard = board.boardAfterMove(Board.MOVE_DOWN);
-        expect(newBoard.grid).toEqual(grid);
-        expect(newBoard.blankPos).toEqual([2, 0]);
-        expect(newBoard.helper).toBe(helper);
+        expect(board.boardAfterMove.bind(board, Board.MOVE_DOWN)).toThrow('Invalid Move!');
       });
     });
     describe('when the move is valid', function() {
@@ -147,12 +144,54 @@ describe('Board', function() {
         const grid = [[2, 1, 3], [5, 4, 6], [-1, 7, 8]];
         Helper.GRID_SIZE = 3;
         const helper = new Helper();
-        const board = new Board(grid, [2, 0], helper);
-        const newBoard = board.boardAfterMove(Board.MOVE_UP);
+
+        let board = new Board(grid, [2, 0], helper);
+        let newBoard = board.boardAfterMove(Board.MOVE_UP);
+
         expect(newBoard.grid).toEqual([[2,1,3],[-1,4,6],[5,7,8]]);
         expect(newBoard.blankPos).toEqual([1, 0]);
-        expect(newBoard.helper).toBe(helper);
         expect(board.grid).toEqual(grid);
+        expect(board.blankPos).toEqual([2, 0]);
+
+        board = newBoard;
+        newBoard = board.boardAfterMove(Board.MOVE_RIGHT);
+
+        expect(newBoard.grid).toEqual([[2,1,3],[4,-1,6],[5,7,8]]);
+        expect(newBoard.blankPos).toEqual([1, 1]);
+        expect(board.grid).toEqual([[2,1,3],[-1,4,6],[5,7,8]]);
+        expect(board.blankPos).toEqual([1, 0]);
+        expect(board.helper).toBe(helper);
+
+        board = newBoard;
+        newBoard = board.boardAfterMove(Board.MOVE_DOWN);
+
+        expect(newBoard.grid).toEqual([[2,1,3],[4,7,6],[5,-1,8]]);
+        expect(newBoard.blankPos).toEqual([2, 1]);
+        expect(board.grid).toEqual([[2,1,3],[4,-1,6],[5,7,8]]);
+        expect(board.blankPos).toEqual([1, 1]);
+
+        board = newBoard;
+        newBoard = board.boardAfterMove(Board.MOVE_LEFT);
+
+        expect(newBoard.grid).toEqual([[2,1,3],[4,7,6],[-1,5,8]]);
+        expect(newBoard.blankPos).toEqual([2, 0]);
+        expect(board.grid).toEqual([[2,1,3],[4,7,6],[5,-1,8]]);
+        expect(board.blankPos).toEqual([2, 1]);
+
+        board = new Board([
+          [  9 ,  8 , 15 ,  2 ],
+          [  5 , 10 ,  1 , 12 ],
+          [ 11 ,  3 , 13 ,  4 ],
+          [  6 ,  7 , -1 , 14 ]
+        ],
+          [3, 2], helper)
+        newBoard = board.boardAfterMove(Board.MOVE_LEFT);
+        expect(newBoard.grid).toEqual(
+        [[9,8,15,2],[5,10,1,12],[11,3,13,4],[6,-1,7,14]]);
+        expect(newBoard.blankPos).toEqual([3, 1]);
+        expect(board.grid).toEqual(
+        [[9,8,15,2],[5,10,1,12],[11,3,13,4],[6,7,-1,14]]);
+        expect(board.blankPos).toEqual([3, 2]);
       });
     });
   });

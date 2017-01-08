@@ -56,8 +56,9 @@ class Board {
    */
   get stepsEstimate() {
     let steps = 0;
-    for (let r = 0; r < this.grid.length; r++) {
-      for (let c = 0; c < this.grid.length; c++) {
+    const size = this.grid.length;
+    for (let r = 0; r < size; r++) {
+      for (let c = 0; c < size; c++) {
         const number = this.grid[r][c];
         if (number > 0) {
           steps += this.helper.distanceToOriginal(number, r, c);
@@ -71,14 +72,10 @@ class Board {
    */
   boardAfterMove(direction) {
     if (!this.validMoves().includes(direction)) {
-      return new Board(
-        this._cloneGrid(),
-        [].concat(this.blankPos),
-        this.helper
-      );
+      throw 'Invalid Move!';
     }
-    let grid = this._cloneGrid();
-    let [newRow, newCol] = this._newPosition(direction)
+    const grid = this._cloneGrid();
+    const [newRow, newCol] = this._newPosition(direction)
     this._swap(grid, newRow, newCol);
     return new Board(grid, [newRow, newCol], this.helper);
   }
