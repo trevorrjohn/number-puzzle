@@ -44,11 +44,12 @@ class Board {
    */
   move(direction) {
     if (!this.validMoves().includes(direction)) {
-      return;
+      return false;
     }
     const newPos = this._newPosition(direction);
     this._swap(this.grid, newPos[0], newPos[1]);
     this.blankPos = newPos;
+    return true;
   }
   /*
    * calculates the absolute minimum number of steps to

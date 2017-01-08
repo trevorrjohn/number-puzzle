@@ -21,28 +21,28 @@ describe('Board', function() {
     describe('when valid direction', function() {
       it('swaps the blank with the tile in the direction', function() {
         const board = new Board();
-        board.move(Board.MOVE_LEFT);
+        expect(board.move(Board.MOVE_LEFT)).toBeTruthy();
         expect(board.grid[3][2]).toBe(-1);
         expect(board.grid[3][3]).toBe(15);
-        board.move(Board.MOVE_LEFT);
+        expect(board.move(Board.MOVE_LEFT)).toBeTruthy();
         expect(board.grid[3][1]).toBe(-1);
         expect(board.grid[3][2]).toBe(14);
-        board.move(Board.MOVE_UP);
+        expect(board.move(Board.MOVE_UP)).toBeTruthy();
         expect(board.grid[2][1]).toBe(-1);
         expect(board.grid[3][1]).toBe(10);
-        board.move(Board.MOVE_UP);
+        expect(board.move(Board.MOVE_UP)).toBeTruthy();
         expect(board.grid[1][1]).toBe(-1);
         expect(board.grid[2][1]).toBe(6);
-        board.move(Board.MOVE_RIGHT);
+        expect(board.move(Board.MOVE_RIGHT)).toBeTruthy();
         expect(board.grid[1][2]).toBe(-1);
         expect(board.grid[1][1]).toBe(7);
-        board.move(Board.MOVE_RIGHT);
+        expect(board.move(Board.MOVE_RIGHT)).toBeTruthy();
         expect(board.grid[1][3]).toBe(-1);
         expect(board.grid[1][2]).toBe(8);
-        board.move(Board.MOVE_DOWN);
+        expect(board.move(Board.MOVE_DOWN)).toBeTruthy();
         expect(board.grid[2][3]).toBe(-1);
         expect(board.grid[1][3]).toBe(12);
-        board.move(Board.MOVE_DOWN);
+        expect(board.move(Board.MOVE_DOWN)).toBeTruthy();
         expect(board.grid[3][3]).toBe(-1);
         expect(board.grid[2][3]).toBe(15);
       });
@@ -50,21 +50,21 @@ describe('Board', function() {
     describe('when invalid direction', function() {
       it('does not change grid position', function() {
         const board = new Board();
-        board.move(Board.MOVE_RIGHT);
+        expect(board.move(Board.MOVE_RIGHT)).toBeFalsy();
         expect(board.grid[3][3]).toBe(-1);
-        board.move(Board.MOVE_DOWN);
+        expect(board.move(Board.MOVE_DOWN)).toBeFalsy();
         expect(board.grid[3][3]).toBe(-1);
         board.move(Board.MOVE_LEFT);
         board.move(Board.MOVE_LEFT);
         board.move(Board.MOVE_LEFT);
         expect(board.grid[3][0]).toBe(-1);
-        board.move(Board.MOVE_LEFT);
+        expect(board.move(Board.MOVE_LEFT)).toBeFalsy();
         expect(board.grid[3][0]).toBe(-1);
         board.move(Board.MOVE_UP);
         board.move(Board.MOVE_UP);
         board.move(Board.MOVE_UP);
         expect(board.grid[0][0]).toBe(-1);
-        board.move(Board.MOVE_UP);
+        expect(board.move(Board.MOVE_UP)).toBeFalsy();
         expect(board.grid[0][0]).toBe(-1);
       });
     });
