@@ -22,20 +22,6 @@
     %div.tile#tile-15 15
     %div.tile#tile-blank &nbsp;
 
-%div.instructions
-  %h3.title Instructions
-  %p
-    Keyboard based
-    %a{ href: 'https://en.wikipedia.org/wiki/15_puzzle' }
-      15-puzzle
-    \.
-  %ul
-    %li Use arrow keys to direct the "Blank" tile.
-    %li Want to start a random puzzle? Press "spacebar".
-    %li Created a puzzle? Press "n".
-    %li Need a hint? Press "q".
-    %li Just want the solution? Press "s".
-
 %div.game-over
   %h3.title.solved Solved!
   %p
@@ -47,3 +33,17 @@
     %br
     %strong Hints:
     %span#hints 0
+
+%div.instructions
+  %h3.title Instructions
+  %p
+    Keyboard based
+    %a{ href: 'https://en.wikipedia.org/wiki/15_puzzle' }
+      15-puzzle
+    \.
+  %ul
+    %li Use arrow keys to direct the "Blank" tile.
+    %li Want to start a random puzzle? Press "spacebar".
+    %li Want to start counting your steps to solve the current configuration? Press "n".
+    %li Need a hint? Press "q".
+    %li Give up? Press "s".
