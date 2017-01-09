@@ -158,4 +158,28 @@ describe('Board', function() {
       expect(board.isSolved).toBe(true);
     });
   });
+  describe('#equal', function() {
+    describe('when other is not an object', function() {
+      it('is false', function() {
+        const board = new Board();
+        expect(board.equal(null)).toBe(false);
+        expect(board.equal(undefined)).toBe(false);
+      });
+    });
+    describe('when other is same object', function() {
+      it('is true', function() {
+        const board = new Board();
+        expect(board.equal(board)).toBe(true);
+      });
+    });
+    describe('when other is different object', function() {
+      it('compares based on the grid', function() {
+        const board = new Board();
+        const other = new Board();
+        expect(board.equal(other)).toBe(true);
+        other.move(Board.MOVE_UP);
+        expect(board.equal(other)).toBe(false);
+      });
+    });
+  });
 });

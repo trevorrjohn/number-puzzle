@@ -77,6 +77,15 @@ class Board {
   clone() {
     return new Board(this.grid, this.blankPos, this.helper);
   }
+  equal(other) {
+    if (!other) {
+      return false;
+    }
+    if (other === this) {
+      return true;
+    }
+    return this.grid + '' === other.grid + '';
+  }
   _newPosition(direction) {
     const [row, col] = this.blankPos;
     switch (direction) {
