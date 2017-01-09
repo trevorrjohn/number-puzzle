@@ -6,6 +6,8 @@ class UiHandler {
     this.hints = 0;
     this.startBoard = null;
     this.listening = true;
+    this.complete = false;
+    this.started = false;
     this.queue = [];
   }
   listen() {
@@ -43,7 +45,7 @@ class UiHandler {
     this._$solvedTitle.stop(true, true);
     if (solved) {
       this._$solvedTitle.animate({ opacity: 1 });
-      delete this.started;
+      this.complete = true;
     } else {
       this._$solvedTitle.animate({ opacity: 0 });
     }
@@ -55,21 +57,21 @@ class UiHandler {
     }
   }
   _start(randomize = true) {
-    if (this.started) {
+    if (this.started && !this.complete) {
       return;
     }
     if (randomize) {
       const steps = this.game.randomizeBoard();
       this._queueMoves(steps).then(() => {
-        this.started = true;
         this._resetGameState();
       });
     } else {
-      this.started = true;
       this._resetGameState();
     }
   }
   _resetGameState() {
+    this.started = true;
+    this.complete = false;
     this.hints = 0;
     this.moves.length = 0;
     this.startBoard = this.game.board.clone();
@@ -82,7 +84,6 @@ class UiHandler {
   }
   _solve() {
     this.solver.solve(this.game.board).then(steps => {
-      this.moves = this.moves.concat(steps);
       this._queueMoves(steps)
     });
   }
