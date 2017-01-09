@@ -7,7 +7,7 @@ describe('Node', function() {
       expect(node.heapSort).toBe(42);
     });
   });
-  describe('isSolved', function() {
+  describe('#isSolved', function() {
     it('delegates to board', function() {
       let node = new Node({ isSolved: true }, []);
       expect(node.isSolved).toBe(true);

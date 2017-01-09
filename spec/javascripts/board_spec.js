@@ -140,11 +140,13 @@ describe('Board', function() {
       ];
       const blankPos = [3, 2];
       const board = new Board(grid, blankPos, helper)
+      board.stepsEstimate;
       const clone = board.clone();
       expect(clone.blankPos).toEqual(board.blankPos);
       expect(clone.blankPos).not.toBe(board.blankPos);
       expect(clone.grid).toEqual(board.grid);
       expect(clone.grid).not.toBe(board.grid);
+      expect(clone._stepsEstimate).toEqual(board.stepsEstimate);
       expect(clone.helper).toBe(helper);
     });
   });

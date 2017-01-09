@@ -46,9 +46,11 @@ class Board {
     if (!this.validMoves().includes(direction)) {
       return false;
     }
-    const newPos = this._newPosition(direction);
-    this._swap(this.grid, newPos[0], newPos[1]);
-    this.blankPos = newPos;
+    const [newRow, newCol] = this._newPosition(direction);
+    const swappedNumber = this.grid[newRow][newCol];
+    this._updateStepsEstimate(swappedNumber, newRow, newCol);
+    this._swap(this.grid, newRow, newCol);
+    this.blankPos = [newRow, newCol];
     return true;
   }
   /*
@@ -56,17 +58,20 @@ class Board {
    * solve the puzzle
    */
   get stepsEstimate() {
-    let steps = 0;
-    const size = this.grid.length;
-    for (let r = 0; r < size; r++) {
-      for (let c = 0; c < size; c++) {
-        const number = this.grid[r][c];
-        if (number > 0) {
-          steps += this.helper.distanceToOriginal(number, r, c);
+    if (!this._stepsEstimate) {
+      let steps = 0;
+      const size = this.grid.length;
+      for (let r = 0; r < size; r++) {
+        for (let c = 0; c < size; c++) {
+          const number = this.grid[r][c];
+          if (number > 0) {
+            steps += this.helper.distanceToOriginal(number, r, c);
+          }
         }
       }
+      this._stepsEstimate = steps;
     }
-    return steps;
+    return this._stepsEstimate;
   }
   get isSolved() {
     return this.stepsEstimate === 0;
@@ -75,7 +80,9 @@ class Board {
    * clone the board
    */
   clone() {
-    return new Board(this.grid, this.blankPos, this.helper);
+    const clone = new Board(this.grid, this.blankPos, this.helper);
+    clone._stepsEstimate = this._stepsEstimate; // for performance
+    return clone;
   }
   equal(other) {
     if (!other) {
@@ -85,6 +92,14 @@ class Board {
       return true;
     }
     return this.grid + '' === other.grid + '';
+  }
+  _updateStepsEstimate(number, newRow, newCol) {
+    if (this._stepsEstimate) {
+      this._stepsEstimate = this.stepsEstimate +
+        this.helper.distanceToOriginal(
+          number, this.blankPos[0], this.blankPos[1]) -
+        this.helper.distanceToOriginal(number, newRow, newCol);
+    }
   }
   _newPosition(direction) {
     const [row, col] = this.blankPos;
