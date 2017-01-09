@@ -10,6 +10,18 @@ class UiHandler {
   }
   listen() {
     $('body').on('keyup', this._handleEvent.bind(this));
+    $('#hint-button').click(() => {
+      if (this.listening) this._hint();
+    });
+    $('#shuffle-button').click(() => {
+      if (this.listening) this._start();
+    });
+    $('#count-button').click(() => {
+      if (this.listening) this._start(false);
+    });
+    $('#solve-button').click(() => {
+      if (this.listening) this._solve();
+    });
   }
   _handleEvent(event) {
     if (this.listening) {

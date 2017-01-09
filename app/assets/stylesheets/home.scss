@@ -6,7 +6,7 @@ $main-color: #3D6599;
 }
 .game-over {
   position: absolute;
-  top: 380px;
+  top: 410px;
   left: 50%;
   transform: translate(-50%, 0);
   p {
@@ -20,7 +20,7 @@ $main-color: #3D6599;
 }
 .instructions {
   position: absolute;
-  top: 460px;
+  top: 480px;
   left: 50%;
   transform: translate(-50%, 0);
 }
@@ -33,7 +33,33 @@ $main-color: #3D6599;
   user-select: none;
   transform: translate(-50%, 0);
   font-size: 0px;
+  .controls {
+    height: 30px;
+    display: inline-block;
+    margin: 0px;
+    padding: 0px;
+    .btn {
+      -webkit-border-radius: 5;
+      -moz-border-radius: 5;
+      display: inline-block;
+      border-radius: 5px;
+      line-height: 24px;
+      text-align: center;
+      font-family: Arial;
+      color: $main-color;
+      font-size: 14px;
+      background: white;
+      margin: 5px;
+      width: 60px;
 
+      text-decoration: none;
+    }
+    .btn:hover {
+      background-color: #F2F2F2;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
   .tile {
     display: inline-block;
     background-color: #F2F2F2;
