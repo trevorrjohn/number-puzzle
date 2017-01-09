@@ -5,6 +5,18 @@ class Helper {
   static set GRID_SIZE(grid_size) {
     this.grid_size = grid_size;
   }
+  static oppositeDirection(direction) {
+    switch (direction) {
+      case Board.MOVE_UP:
+        return Board.MOVE_DOWN;
+      case Board.MOVE_DOWN:
+        return Board.MOVE_UP;
+      case Board.MOVE_LEFT:
+        return Board.MOVE_RIGHT;
+      case Board.MOVE_RIGHT:
+        return Board.MOVE_LEFT;
+    }
+  }
   static get solvedGrid() {
     const grid = [];
     for (let i = 0; i < Helper.GRID_SIZE; i++) {
@@ -31,16 +43,7 @@ class Helper {
     console.log(output);
   }
   oppositeDirection(direction) {
-    switch (direction) {
-      case Board.MOVE_UP:
-        return Board.MOVE_DOWN;
-      case Board.MOVE_DOWN:
-        return Board.MOVE_UP;
-      case Board.MOVE_LEFT:
-        return Board.MOVE_RIGHT;
-      case Board.MOVE_RIGHT:
-        return Board.MOVE_LEFT;
-    }
+    return Helper.oppositeDirection(direction)
   }
   /*
    * Returns distance from a position to a number

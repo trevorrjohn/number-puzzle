@@ -13,5 +13,6 @@
 //= require promise
 //= require jquery3
 //= require jquery_ujs
+//= require touch_swipe
 //= require turbolinks
 //= require_tree .

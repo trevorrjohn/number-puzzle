@@ -10,6 +10,13 @@ class UiHandler {
   }
   listen() {
     $('body').on('keyup', this._handleEvent.bind(this));
+    $('body').swipe({
+      swipe: (_, direction) => {
+        if (this.listening) {
+          this._updateBoard(direction);
+        }
+      }
+    });
     $('#hint-button').click(() => {
       if (this.listening) this._hint();
     });
@@ -27,7 +34,7 @@ class UiHandler {
     if (this.listening) {
       const direction = this._handleInput(event.keyCode);
       if (direction) {
-        this._updateBoard(direction).then(() => {}, () => {});
+        this._updateBoard(direction);
       }
       return true;
     }
