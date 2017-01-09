@@ -7,6 +7,6 @@ class Node {
     return this.board.stepsEstimate + this.steps.length;
   }
   get isSolved() {
-    return this.board.stepsEstimate === 0;
+    return this.board.isSolved;
   }
 }

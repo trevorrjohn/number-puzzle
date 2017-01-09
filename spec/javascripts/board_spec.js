@@ -148,4 +148,14 @@ describe('Board', function() {
       expect(clone.helper).toBe(helper);
     });
   });
+  describe('#isSolved', function() {
+    it('returns state based on steps estimate', function() {
+      const board = new Board(Helper.solvedGrid);
+      expect(board.isSolved).toBe(true);
+      board.move(Board.MOVE_UP);
+      expect(board.isSolved).toBe(false);
+      board.move(Board.MOVE_DOWN);
+      expect(board.isSolved).toBe(true);
+    });
+  });
 });

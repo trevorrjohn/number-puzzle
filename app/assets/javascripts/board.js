@@ -68,6 +68,9 @@ class Board {
     }
     return steps;
   }
+  get isSolved() {
+    return this.stepsEstimate === 0;
+  }
   /*
    * clone the board
    */

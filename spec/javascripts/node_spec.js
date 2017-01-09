@@ -8,21 +8,11 @@ describe('Node', function() {
     });
   });
   describe('isSolved', function() {
-    describe('when the fewest steps on the board is 0', function() {
-      it('is true', function() {
-        const board = { stepsEstimate: 0 };
-        const steps = { length: 20 };
-        const node = new Node(board, steps);
-        expect(node.isSolved).toBe(true);
-      });
-    });
-    describe('when the fewest steps on the board is not zero', function() {
-      it('is false', function() {
-        const board = { stepsEstimate: 5 };
-        const steps = { length: 0 };
-        const node = new Node(board, steps);
-        expect(node.isSolved).toBe(false);
-      });
+    it('delegates to board', function() {
+      let node = new Node({ isSolved: true }, []);
+      expect(node.isSolved).toBe(true);
+      node = new Node({isSolved: false }, []);
+      expect(node.isSolved).toBe(false);
     });
   });
 });
