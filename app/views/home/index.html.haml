@@ -2,22 +2,48 @@
 
 %div.board
   %div.row
-    %span.tile#tile-1 1
-    %span.tile#tile-2 2
-    %span.tile#tile-3 3
-    %span.tile#tile-4 4
+    %div.tile#tile-1 1
+    %div.tile#tile-2 2
+    %div.tile#tile-3 3
+    %div.tile#tile-4 4
   %div.row
-    %span.tile#tile-5 5
-    %span.tile#tile-6 6
-    %span.tile#tile-7 7
-    %span.tile#tile-8 8
+    %div.tile#tile-5 5
+    %div.tile#tile-6 6
+    %div.tile#tile-7 7
+    %div.tile#tile-8 8
   %div.row
-    %span.tile#tile-9 9
-    %span.tile#tile-10 10
-    %span.tile#tile-11 11
-    %span.tile#tile-12 12
+    %div.tile#tile-9 9
+    %div.tile#tile-10 10
+    %div.tile#tile-11 11
+    %div.tile#tile-12 12
   %div.row
-    %span.tile#tile-13 13
-    %span.tile#tile-14 14
-    %span.tile#tile-15 15
-    %span.tile#blank-tile &nbsp;
+    %div.tile#tile-13 13
+    %div.tile#tile-14 14
+    %div.tile#tile-15 15
+    %div.tile#tile-blank &nbsp;
+
+%div.instructions
+  %h3.title Instructions
+  %p
+    Keyboard based
+    %a{ href: 'https://en.wikipedia.org/wiki/15_puzzle' }
+      15-puzzle
+    \.
+  %ul
+    %li Use arrow keys to direct the "Blank" tile.
+    %li Want to start a random puzzle? Press "spacebar".
+    %li Created a puzzle? Press "n".
+    %li Need a hint? Press "q".
+    %li Just want the solution? Press "s".
+
+%div.game-over
+  %h3.title.solved Solved!
+  %p
+    %strong Steps:
+    %span#steps 0
+    %br
+    %strong Optimal Steps:
+    %span#optimal 0
+    %br
+    %strong Hints:
+    %span#hints 0
