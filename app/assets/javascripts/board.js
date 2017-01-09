@@ -69,16 +69,10 @@ class Board {
     return steps;
   }
   /*
-   * returns new board after the direction is applied
+   * clone the board
    */
-  boardAfterMove(direction) {
-    if (!this.validMoves().includes(direction)) {
-      throw 'Invalid Move!';
-    }
-    const grid = this._cloneGrid();
-    const [newRow, newCol] = this._newPosition(direction)
-    this._swap(grid, newRow, newCol);
-    return new Board(grid, [newRow, newCol], this.helper);
+  clone() {
+    return new Board(this.grid, this.blankPos, this.helper);
   }
   _newPosition(direction) {
     const [row, col] = this.blankPos;
@@ -98,12 +92,5 @@ class Board {
     const [blankRow, blankCol] = this.blankPos;
     grid[blankRow][blankCol] = num;
     grid[row][col] = -1;
-  }
-  _cloneGrid() {
-    const grid = [];
-    for (let r = 0, size = this.grid.length; r < size; r++) {
-      grid.push([].concat(this.grid[r]))
-    }
-    return grid;
   }
 }

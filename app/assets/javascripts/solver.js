@@ -19,7 +19,8 @@ class Solver {
       const lastStep = node.steps[node.steps.length - 1];
       validMoves.forEach(move => {
         if (this.helper.oppositeDirection(move) !== lastStep) {
-          const nextBoard = node.board.boardAfterMove(move);
+          const nextBoard = node.board.clone();
+          nextBoard.move(move);
           const nextSteps = node.steps.concat([move]);
           heap.push(new Node(nextBoard, nextSteps));
         }
